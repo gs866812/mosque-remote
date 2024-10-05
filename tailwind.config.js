@@ -11,6 +11,10 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        'bengali': ['"Noto Serif Bengali"', 'serif'], // Add the Bengali font here
+        'poppins': ['"Poppins"', 'sans-serif'],
+      },
     },
   },
   plugins: [],
