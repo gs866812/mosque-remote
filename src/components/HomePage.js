@@ -1,7 +1,13 @@
-import React from 'react'
+import moment from 'moment';
+import 'moment/locale/bn-bd';  // Import the Bengali locale
+import DonationList from './DonationList';
+import CostingList from './CostingList';
+// Set the locale to Bengali
+moment.locale('bn-bd');
+
 
 export default function HomePage() {
-    const date = new Date().getFullYear();
+    const date = moment(new Date()).format('DD/MM/YYYY');
   return (
     <div className='mx-auto w-[80%] rounded-md shadow-[5px_0_10px_rgba(0,128,197,0.29)]'>
         <div className='bg-[#0080C5] text-white flex items-center justify-center py-2 text-xl rounded-t-md'>
@@ -9,9 +15,18 @@ export default function HomePage() {
             <h2 className='w-[30%] flex justify-center'>খরচের বিবরনি</h2>
         </div>
 
+        <div className='flex justify-center items-start mx-auto'>
+            {/* List of donar */}
+            <div className='w-[70%] border-r border-[#00ADE7] border-1 p-2 pl-5'>
+                <DonationList/>
+            </div>
+            <div className='w-[30%] p-2 pl-5 mt-2'>
+                <CostingList/>
+            </div>
+        </div>
 
-        <div className='bg-[#0080C5] h-[20px] rounded-b-md mt-5'>
-            {date}
+
+        <div className='bg-[#0080C5] h-[20px] rounded-b-md mt-2'>
         </div>
     </div>
   )

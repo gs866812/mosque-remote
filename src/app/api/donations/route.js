@@ -1,26 +1,21 @@
 import clientPromise from "@/lib/mongodb";
 
-export async function GET() {
-    try {
-        const client = await clientPromise; // Await connection to MongoDB
-        const db = client.db("mosqueData"); // Select your database
-        const costing = db.collection("costingList"); // Access the 'costingList' collection
+export async function POST(req) {
+  try {
+    const client = await clientPromise;
+    const db = client.db("mosqueData");
+    const donation = db.collection("donationList");
 
-        const result = await costing.find({}).toArray();
+    const body = await req.json(); // Parse the incoming request body
 
-        // Return the data as a JSON string
-        return new Response(JSON.stringify(result), {
-            status: 200,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-    } catch (error) {
-        return new Response(JSON.stringify({ success: false, error: error.message }), {
-            status: 500,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-    }
+    const result = await donation.insertOne(body); // Insert data into MongoDB
+
+    return new Response(JSON.stringify({ success: true, data: result }), {
+      status: 201,
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ success: false, error: error.message }), {
+      status: 500,
+    });
+  }
 }

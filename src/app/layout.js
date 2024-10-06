@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import "./globals.css";
 import Footer from "@/components/Footer";
+import DataProvider from "./DataProvider";
 
 
 export const metadata = {
@@ -11,15 +12,19 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light">
       <body>
-        <header className='z-50'>
-          <Header/>
-        </header>
-        <main className='z-0 py-5 mb-5'>
-          {children}
-        </main>
-        <footer>
-          <Footer/>
-        </footer>
+        <DataProvider>
+          <div>
+            <header className='z-50'>
+              <Header />
+            </header>
+            <main className='z-0 py-5 mb-5'>
+              {children}
+            </main>
+            <footer>
+              <Footer />
+            </footer>
+          </div>
+        </DataProvider>
       </body>
     </html>
   );
