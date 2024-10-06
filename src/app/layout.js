@@ -1,7 +1,11 @@
 import Header from "@/components/Header";
 import "./globals.css";
+import 'react-toastify/dist/ReactToastify.css';
 import Footer from "@/components/Footer";
 import DataProvider from "./DataProvider";
+import { ToastContainer } from "react-toastify";
+
+
 
 
 export const metadata = {
@@ -18,6 +22,7 @@ export default function RootLayout({ children }) {
               <Header />
             </header>
             <main className='z-0 py-5 mb-5'>
+              <ToastContainer position="top-right" />
               {children}
             </main>
             <footer>

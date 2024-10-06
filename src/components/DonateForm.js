@@ -1,6 +1,14 @@
 "use client";
+import moment from "moment";
+import { toast } from "react-toastify";
+import 'moment/locale/bn-bd';
+import { useContext } from "react";
+import { ContextData } from "@/app/DataProvider";
+moment.locale('bn-bd');
+
 
 export default function DonateForm() {
+    const { triggerReFetch } = useContext(ContextData);
 
 
     // Handle Form-1 Submission (POST request for Form-1)
@@ -26,14 +34,51 @@ export default function DonateForm() {
             const data = await response.json();
 
             if (response.ok) {
-                console.log("Form-1 Submitted Successfully:", data);
                 // Optionally reset form or show success message
                 form.reset();
+                triggerReFetch();
+                toast.success('উক্ত দানটি জমা হয়েছে ');
             } else {
-                console.error("Form-1 Submission Error:", data.error);
+                toast.error("উক্ত দানটি জমা হয়নি", data.error);
             }
         } catch (error) {
-            console.error("Error submitting Form-1:", error);
+            toast.error("একটি সমস্যা হয়েছে", error);
+        }
+
+
+    };
+    // Handle Form-2 Submission (POST request for Form-2)
+    const handleForm2Submit = async (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const expenseDescription = form.expenseDescription.value;
+        const expenseAmount = form.expenseAmount.value;
+        const date = moment(new Date()).format('DD/MM/YYYY');
+
+        const expenseInfo = { expenseDescription, expenseAmount, date };
+
+        try {
+            const response = await fetch("/api/expense", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(expenseInfo), // Sending the form data
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Optionally reset form or show success message
+                form.reset();
+                triggerReFetch();
+                toast.success('খরচটি সম্পন্ন হয়েছে ');
+            } else {
+                toast.error("খরচটি সম্পন্ন হয়নি", data.error);
+            }
+        } catch (error) {
+            toast.error("একটি সমস্যা হয়েছে", error);
         }
 
 
@@ -85,7 +130,7 @@ export default function DonateForm() {
             </form>
 
             {/* Form-2 */}
-            <form className='w-1/2 p-5'>
+            <form onSubmit={handleForm2Submit} className='w-1/2 p-5'>
                 <h2 className='text-xl font-bold mb-4'>খরচের বিবরণ</h2>
                 <div className='mb-4'>
                     <label className='block mb-2'>খরচ</label>

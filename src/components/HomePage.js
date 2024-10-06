@@ -1,13 +1,9 @@
-import moment from 'moment';
-import 'moment/locale/bn-bd';  // Import the Bengali locale
 import DonationList from './DonationList';
 import CostingList from './CostingList';
-// Set the locale to Bengali
-moment.locale('bn-bd');
 
 
 export default function HomePage() {
-    const date = moment(new Date()).format('DD/MM/YYYY');
+    
   return (
     <div className='mx-auto w-[80%] rounded-md shadow-[5px_0_10px_rgba(0,128,197,0.29)]'>
         <div className='bg-[#0080C5] text-white flex items-center justify-center py-2 text-xl rounded-t-md'>

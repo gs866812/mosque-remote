@@ -21,33 +21,33 @@ export async function POST(req) {
   try {
     const client = await clientPromise;
     const db = client.db("mosqueData");
-    const donation = db.collection("donationList");
+    const expense = db.collection("expenseList");
     const donationBalance = db.collection("donateBalanceList");
 
     const body = await req.json(); // Parse the incoming request body
 
-    // Insert the donation data into MongoDB (store as Bengali numerals from user input)
-    const result = await donation.insertOne(body);
+    // Insert the expense data into MongoDB (as Bengali numerals from user input)
+    const result = await expense.insertOne(body);
 
-    // Convert donationAmount from Bengali numerals to English numerals for calculation
-    const donationAmountInEnglish = convertBengaliToEnglish(body.donationAmount);
-    const donationAmount = parseFloat(donationAmountInEnglish); // Convert to float for calculations
+    // Convert expenseAmount from Bengali numerals to English numerals for calculation
+    const expenseAmountInEnglish = convertBengaliToEnglish(body.expenseAmount);
+    const expenseAmount = parseFloat(expenseAmountInEnglish); // Convert to float for calculations
 
     // Check if the donation balance exists
     const isExist = await donationBalance.findOne({});
     
     if (!isExist) {
-      // No balance exists, insert a new entry with the positive initial balance (in Bengali)
+      // No balance exists, create a new one and store the totalBalance as Bengali numerals
       await donationBalance.insertOne({
-        totalBalance: convertEnglishToBengali(donationAmountInEnglish), // Insert positive value in Bengali numerals
+        totalBalance: convertEnglishToBengali(- expenseAmountInEnglish), // Convert back to Bengali numerals
       });
     } else {
       // Fetch the current total balance (in Bengali numerals) and convert it to English numerals for calculation
       const currentBalanceInBengali = isExist.totalBalance;
       const currentBalanceInEnglish = parseFloat(convertBengaliToEnglish(currentBalanceInBengali));
 
-      // Add the donation amount to the current balance and convert back to Bengali
-      const updatedBalanceInEnglish = currentBalanceInEnglish + donationAmount;
+      // Subtract the expense amount and convert the result back to Bengali numerals
+      const updatedBalanceInEnglish = currentBalanceInEnglish - expenseAmount;
       const updatedBalanceInBengali = convertEnglishToBengali(updatedBalanceInEnglish);
 
       // Update the total balance in Bengali numerals
