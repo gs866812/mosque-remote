@@ -22,7 +22,7 @@ export default function HomePage() {
         </div>
 
 
-        <div className='bg-[#0080C5] h-[20px] rounded-b-md mt-2'>
+        <div className='bg-[#0080C5] h-[20px] rounded-b-md'>
         </div>
     </div>
   )
