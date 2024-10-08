@@ -49,7 +49,6 @@ function groupByDate(expenses = []) {
 
 export default function CostingList() {
     const { costingList } = useContext(ContextData);
-    console.log(costingList);
 
     // Group costingList by date
     const groupedByDate = groupByDate(costingList);

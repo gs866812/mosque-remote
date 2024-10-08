@@ -1,5 +1,5 @@
+export const dynamic = 'force-dynamic';
 import clientPromise from "@/lib/mongodb";
-
 
 
 export async function GET() {

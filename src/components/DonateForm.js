@@ -8,7 +8,7 @@ moment.locale('bn-bd');
 
 
 export default function DonateForm() {
-    const { triggerReFetch } = useContext(ContextData);
+    const { triggerReFetch, handleLogout } = useContext(ContextData);
 
 
     // Handle Form-1 Submission (POST request for Form-1)
@@ -83,82 +83,88 @@ export default function DonateForm() {
 
 
     };
-
+    // <button onClick={handleLogout}>Log out</button>
 
     return (
-        <div className='mx-auto w-[80%] border shadow-md rounded-md flex items-start justify-between px-5 gap-5'>
-            {/* Form-1 */}
-            <form onSubmit={handleForm1Submit} className='w-1/2 p-5 border-r'>
-                <h2 className='text-xl font-bold mb-4'>দাতার বিবরণ</h2>
-                <div className='mb-4'>
-                    <label className='block mb-2'>দাতার নাম</label>
-                    <input
-                        type='text'
-                        name='donorName'
-                        required
-                        className='w-full p-2 border rounded'
-                        placeholder='দাতার নাম লিখুন...'
-                    />
-                </div>
+        <div className='mx-auto w-[80%]'>
+            <div className='flex justify-end'>
+            <button onClick={handleLogout} className='bg-red-500 rounded-md text-white py-1 px-3'>Log out</button>
+            </div>
 
-                <div className='mb-4'>
-                    <label className='block mb-2'>দাতার ঠিকানা</label>
-                    <input
-                        type='text'
-                        name='donorAddress'
-                        required
-                        className='w-full p-2 border rounded'
-                        placeholder='দাতার ঠিকানা লিখুন...'
-                    />
-                </div>
+            <div className='border shadow-md rounded-md flex items-start justify-between px-5 gap-5 mt-5'>
+                {/* Form-1 */}
+                <form onSubmit={handleForm1Submit} className='w-1/2 p-5 border-r'>
+                    <h2 className='text-xl font-bold mb-4'>দাতার বিবরণ</h2>
+                    <div className='mb-4'>
+                        <label className='block mb-2'>দাতার নাম</label>
+                        <input
+                            type='text'
+                            name='donorName'
+                            required
+                            className='w-full p-2 border rounded'
+                            placeholder='দাতার নাম লিখুন...'
+                        />
+                    </div>
 
-                <div className='mb-4'>
-                    <label className='block mb-2'>টাকার পরিমান</label>
-                    <input
-                        type='text'
-                        name='donationAmount'
-                        required
-                        className='w-full p-2 border rounded'
-                        placeholder='মোট টাকার পরিমান লিখুন...'
-                    />
-                </div>
+                    <div className='mb-4'>
+                        <label className='block mb-2'>দাতার ঠিকানা</label>
+                        <input
+                            type='text'
+                            name='donorAddress'
+                            required
+                            className='w-full p-2 border rounded'
+                            placeholder='দাতার ঠিকানা লিখুন...'
+                        />
+                    </div>
 
-                {/* Submit Button for Form-1 */}
-                <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded'>
-                    জমা দিন
-                </button>
-            </form>
+                    <div className='mb-4'>
+                        <label className='block mb-2'>টাকার পরিমান</label>
+                        <input
+                            type='text'
+                            name='donationAmount'
+                            required
+                            className='w-full p-2 border rounded'
+                            placeholder='মোট টাকার পরিমান লিখুন...'
+                        />
+                    </div>
 
-            {/* Form-2 */}
-            <form onSubmit={handleForm2Submit} className='w-1/2 p-5'>
-                <h2 className='text-xl font-bold mb-4'>খরচের বিবরণ</h2>
-                <div className='mb-4'>
-                    <label className='block mb-2'>খরচ</label>
-                    <input
-                        type='text'
-                        name='expenseDescription'
-                        required
-                        className='w-full p-2 border rounded'
-                        placeholder='খরচের বিবরণ লিখুন...'
-                    />
-                </div>
+                    {/* Submit Button for Form-1 */}
+                    <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded'>
+                        জমা দিন
+                    </button>
+                </form>
 
-                <div className='mb-4'>
-                    <label className='block mb-2'>টাকার পরিমান</label>
-                    <input
-                        type='text'
-                        name='expenseAmount'
-                        required
-                        className='w-full p-2 border rounded'
-                        placeholder='মোট খরচের পরিমান লিখুন...'
-                    />
-                </div>
+                {/* Form-2 */}
+                <form onSubmit={handleForm2Submit} className='w-1/2 p-5'>
+                    <h2 className='text-xl font-bold mb-4'>খরচের বিবরণ</h2>
+                    <div className='mb-4'>
+                        <label className='block mb-2'>খরচ</label>
+                        <input
+                            type='text'
+                            name='expenseDescription'
+                            required
+                            className='w-full p-2 border rounded'
+                            placeholder='খরচের বিবরণ লিখুন...'
+                        />
+                    </div>
 
-                {/* Submit Button for Form-2 */}
-                <button type='submit' className='bg-green-500 text-white px-4 py-2 rounded'>
-                    জমা দিন
-                </button>
-            </form>
+                    <div className='mb-4'>
+                        <label className='block mb-2'>টাকার পরিমান</label>
+                        <input
+                            type='text'
+                            name='expenseAmount'
+                            required
+                            className='w-full p-2 border rounded'
+                            placeholder='মোট খরচের পরিমান লিখুন...'
+                        />
+                    </div>
+
+                    {/* Submit Button for Form-2 */}
+                    <button type='submit' className='bg-green-500 text-white px-4 py-2 rounded'>
+                        জমা দিন
+                    </button>
+                </form>
+            </div>
         </div>
     );
 }

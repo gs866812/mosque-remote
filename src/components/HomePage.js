@@ -13,10 +13,10 @@ export default function HomePage() {
 
         <div className='flex justify-center items-start mx-auto'>
             {/* List of donar */}
-            <div className='w-[70%] border-r border-[#00ADE7] border-1 p-2 pl-5'>
+            <div className='w-[70%] border-r border-[#00ADE7] border-1 p-2 pl-5] h-full'>
                 <DonationList/>
             </div>
-            <div className='w-[30%] p-2 pl-5 mt-2'>
+            <div className='w-[29%] p-2 pl-5 mt-2 border-l border-[#00ADE7] border-1'>
                 <CostingList/>
             </div>
         </div>

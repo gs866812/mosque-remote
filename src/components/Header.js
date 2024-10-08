@@ -28,7 +28,6 @@ function formatNumberWithCommas(number) {
 
 export default function Header() {
     const { mainBalance } = useContext(ContextData);
-    console.log(mainBalance);
 
     // Check if mainBalance is available and contains the required data
     const formattedBalance = mainBalance && Array.isArray(mainBalance) && mainBalance[0]?.totalBalance

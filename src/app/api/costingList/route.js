@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import clientPromise from "@/lib/mongodb";
 
 export async function GET() {
@@ -9,7 +10,7 @@ export async function GET() {
 
 
         // Fetch the data
-        const result = await expense.find().toArray();
+        const result = await expense.find().sort({_id: -1}).toArray();
 
 
         // Return success response

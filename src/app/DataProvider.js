@@ -1,6 +1,7 @@
 "use client";
 import { useState, createContext, useEffect } from "react";
 import { toast } from "react-toastify";
+import { useRouter } from 'next/navigation';
 export const ContextData = createContext(null);
 
 
@@ -10,6 +11,7 @@ export default function DataProvider({ children }) {
     const [donorList, setDonorList] = useState({});
     const [costingList, setCostingList] = useState({});
     const [mainBalance, setMainBalance] = useState(0);
+    const router = useRouter();
 
 
 
@@ -94,6 +96,16 @@ export default function DataProvider({ children }) {
             });
     }, [reFetch]); // Will re-fetch when reFetch changes
 
+    // Logout
+    const handleLogout = async () => {
+        await fetch('/api/logout', {
+            method: 'POST',
+        });
+
+        // After logging out, redirect to the home page
+        router.push('/');
+    };
+
 
 
     const info = {
@@ -103,6 +115,7 @@ export default function DataProvider({ children }) {
         triggerReFetch,
         costingList,
         mainBalance,
+        handleLogout,
     };
     return <ContextData.Provider value={info}>{children}</ContextData.Provider>
 }
