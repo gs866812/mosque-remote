@@ -34,11 +34,9 @@ export default function HomePage() {
               <div className="absolute marquee-content">
                 {
                   Array.isArray(donorList) && donorList.map((donor, index) => (
-                    <div className=''>
                       <p className='font-bold text-[40px] pl-4 pt-6 w-full' key={index}>
                         {convertEnglishToBengali(index + 1)}. {donor.donorName}
                       </p>
-                    </div>
                   ))
                 }
               </div>
