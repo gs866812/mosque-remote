@@ -22,6 +22,7 @@ export async function POST(req) {
     const client = await clientPromise;
     const db = client.db("mosqueData");
     const donation = db.collection("donationList");
+    const donor = db.collection("donorList");
     const donationBalance = db.collection("donateBalanceList");
 
     const body = await req.json(); // Parse the incoming request body
@@ -35,7 +36,7 @@ export async function POST(req) {
 
     // Check if the donation balance exists
     const isExist = await donationBalance.findOne({});
-    
+
     if (!isExist) {
       // No balance exists, insert a new entry with the positive initial balance (in Bengali)
       await donationBalance.insertOne({
@@ -53,6 +54,21 @@ export async function POST(req) {
       // Update the total balance in Bengali numerals
       await donationBalance.updateOne({}, {
         $set: { totalBalance: updatedBalanceInBengali },
+      });
+    }
+
+    // Add donor list code here
+    const existingDonor = await donor.findOne({ donorContact: body.donorContact });
+    if (!existingDonor) {
+      // Find the highest donorID and increment it
+      const lastDonor = await donor.find().sort({ donorID: -1 }).limit(1).toArray();
+      const newDonorID = lastDonor.length > 0 ? lastDonor[0].donorID + 1 : 10;
+
+      await donor.insertOne({
+        donorID: newDonorID,
+        donorName: body.donorName,
+        donorContact: body.donorContact,
+        donorAddress: body.donorAddress,
       });
     }
 

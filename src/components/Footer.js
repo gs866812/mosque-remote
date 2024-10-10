@@ -1,13 +1,22 @@
-import React from 'react'
+'use client';
+import { ContextData } from '@/app/DataProvider';
+import { useContext } from "react";
+import Marquee from 'react-fast-marquee';
 
 export default function Footer() {
+    const { hadithList } = useContext(ContextData);
+    console.log(hadithList);
+
     return (
 
         <div className='w-full flex justify-center items-center bg-[#134834] text-white h-[94px]'>
-            <p className='text-[32px]'>{`
-                    রসুলুল্লাহ সাঃ বলেন, 'সাদকা করলে কোনও মানুষের সম্পদ কমে না। (তিরমিজি, ইবনে মাজাহ) 
-                    রসুলুল্লাহ সাঃ বলেন, 'সাদকা করলে কোনও মানুষের সম্পদ কমে না। (তিরমিজি, ইবনে মাজাহ)
-                `}</p>
+            <Marquee>
+            {
+                hadithList && hadithList.map((hadith, idx) => <p className='text-[32px]' key={idx}>
+                    {`${hadith.hadithList}`}
+                </p>)
+            }
+            </Marquee>
         </div>
 
     )

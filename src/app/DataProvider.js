@@ -11,6 +11,7 @@ export default function DataProvider({ children }) {
     const [donorList, setDonorList] = useState([]);
     const [costingList, setCostingList] = useState([]);
     const [mainBalance, setMainBalance] = useState(0);
+    const [hadithList, setHadithList] = useState([]);
     const router = useRouter();
 
 
@@ -120,6 +121,25 @@ function formatNumberWithCommas(number) {
             });
     }, [reFetch]); // Will re-fetch when reFetch changes
 
+
+    useEffect(() => {
+        // Fetch for hadith
+        fetch("/api/getHadith")
+            .then((response) => {
+                if (!response.ok) {
+                    toast.error("একটি সমস্যা হয়েছে");
+                    return; // Return to stop further execution if there's an error
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setHadithList(data); // Store fetched data in the state
+            })
+            .catch((err) => {
+                toast.error(err.message); // Show error if fetching fails
+            });
+    }, [reFetch]); // Will re-fetch when reFetch changes
+
     // Logout
     const handleLogout = async () => {
         await fetch('/api/logout', {
@@ -143,6 +163,7 @@ function formatNumberWithCommas(number) {
         convertBengaliToEnglish,
         convertEnglishToBengali,
         formatNumberWithCommas,
+        hadithList
     };
     return <ContextData.Provider value={info}>{children}</ContextData.Provider>
 }

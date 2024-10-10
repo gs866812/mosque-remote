@@ -17,10 +17,13 @@ export default function DonateForm() {
 
         const form = e.target;
         const donorName = form.donorName.value;
+        const donorContact = form.donorContact.value;
         const donorAddress = form.donorAddress.value;
         const donationAmount = form.donationAmount.value;
+        const date = moment(new Date()).format('DD/MM/YYYY');
+        const month = moment(new Date()).format('MMMM');
 
-        const donorInfo = { donorName, donorAddress, donationAmount };
+        const donorInfo = { donorName, donorContact, donorAddress, donationAmount, date, month };
 
         try {
             const response = await fetch("/api/donations", {
@@ -55,8 +58,9 @@ export default function DonateForm() {
         const expenseDescription = form.expenseDescription.value;
         const expenseAmount = form.expenseAmount.value;
         const date = moment(new Date()).format('DD/MM/YYYY');
+        const month = moment(new Date()).format('MMMM');
 
-        const expenseInfo = { expenseDescription, expenseAmount, date };
+        const expenseInfo = { expenseDescription, expenseAmount, date, month };
 
         try {
             const response = await fetch("/api/expense", {
@@ -83,17 +87,52 @@ export default function DonateForm() {
 
 
     };
-    // <button onClick={handleLogout}>Log out</button>
+    // Handle Form-3 Submission (POST request for Form-2)
+    const handleForm3Submit = async (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const hadithList = form.hadithList.value;
+        const date = moment(new Date()).format('DD/MM/YYYY');
+
+        const hadithInfo = { hadithList, date };
+
+        try {
+            const response = await fetch("/api/hadith", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(hadithInfo), // Sending the form data
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Optionally reset form or show success message
+                form.reset();
+                triggerReFetch();
+                toast.success('হাদীসটি যুক্ত হয়েছে ');
+            } else {
+                toast.error("হাদীসটি যুক্ত হয়নি", data.error);
+            }
+        } catch (error) {
+            toast.error("একটি সমস্যা হয়েছে", error);
+        }
+
+
+    };
+
 
     return (
         <div className='mx-auto w-[80%]'>
             <div className='flex justify-end'>
-            <button onClick={handleLogout} className='bg-red-500 rounded-md text-white py-1 px-3'>Log out</button>
+                <button onClick={handleLogout} className='bg-red-500 rounded-md text-white py-1 px-3 mt-3'>Log out</button>
             </div>
 
-            <div className='border shadow-md rounded-md flex items-start justify-between px-5 gap-5 mt-5'>
+            <div className='flex flex-col items-start justify-between px-5 gap-5 my-10'>
                 {/* Form-1 */}
-                <form onSubmit={handleForm1Submit} className='w-1/2 p-5 border-r'>
+                <form onSubmit={handleForm1Submit} className='w-full p-5 border-green-600 border mt-5 rounded-lg'>
                     <h2 className='text-xl font-bold mb-4'>দাতার বিবরণ</h2>
                     <div className='mb-4'>
                         <label className='block mb-2'>দাতার নাম</label>
@@ -103,6 +142,17 @@ export default function DonateForm() {
                             required
                             className='w-full p-2 border rounded'
                             placeholder='দাতার নাম লিখুন...'
+                        />
+                    </div>
+
+                    <div className='mb-4'>
+                        <label className='block mb-2'>দাতার মোবাইল নাম্বার</label>
+                        <input
+                            type='text'
+                            name='donorContact'
+                            required
+                            className='w-full p-2 border rounded'
+                            placeholder='দাতার মোবাইল নাম্বার লিখুন...'
                         />
                     </div>
 
@@ -135,7 +185,7 @@ export default function DonateForm() {
                 </form>
 
                 {/* Form-2 */}
-                <form onSubmit={handleForm2Submit} className='w-1/2 p-5'>
+                <form onSubmit={handleForm2Submit} className='w-full p-5 border border-green-600 rounded-lg'>
                     <h2 className='text-xl font-bold mb-4'>খরচের বিবরণ</h2>
                     <div className='mb-4'>
                         <label className='block mb-2'>খরচ</label>
@@ -164,6 +214,22 @@ export default function DonateForm() {
                         জমা দিন
                     </button>
                 </form>
+
+                {/* Form-3 */}
+                <form onSubmit={handleForm3Submit} className='w-full p-5 border border-green-600 rounded-lg'>
+                    <h2 className='text-xl font-bold mb-4'>হাদীস সমূহ</h2>
+                    <div className='mb-4'>
+                        <label className='block mb-2'>
+                        <textarea name="hadithList" rows="4" className='w-full p-2 border rounded' placeholder='হাদীস লিখুন ...' />
+                        </label>
+                    </div>
+
+                    {/* Submit Button for Form-3 */}
+                    <button type='submit' className='bg-green-500 text-white px-4 py-2 rounded'>
+                        জমা দিন
+                    </button>
+                </form>
+
             </div>
         </div>
     );

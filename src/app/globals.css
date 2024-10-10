@@ -21,4 +21,26 @@
     font-family: "Noto Serif Bengali", serif;
   }
 
+  .marquee {
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .marquee-content {
+    animation: scrollUp 20s linear infinite;
+  }
+
+  
+
+
+  @keyframes scrollUp {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(-100%);
+    }
+  }
+  
+
 
