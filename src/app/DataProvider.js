@@ -8,10 +8,34 @@ export const ContextData = createContext(null);
 export default function DataProvider({ children }) {
     const [loading, setLoading] = useState(true);
     const [reFetch, setReFetch] = useState(false);
-    const [donorList, setDonorList] = useState({});
-    const [costingList, setCostingList] = useState({});
+    const [donorList, setDonorList] = useState([]);
+    const [costingList, setCostingList] = useState([]);
     const [mainBalance, setMainBalance] = useState(0);
     const router = useRouter();
+
+
+    // Utility function to convert Bengali numerals to English numerals
+function convertBengaliToEnglish(bengaliNum) {
+    const bengaliDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+    const englishDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    return bengaliNum.toString().replace(/[০-৯]/g, (digit) => {
+        return englishDigits[bengaliDigits.indexOf(digit)];
+    });
+}
+
+// Utility function to convert English numerals to Bengali numerals
+function convertEnglishToBengali(englishNum) {
+    const englishDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    const bengaliDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+    return englishNum.toString().replace(/[0-9]/g, (digit) => {
+        return bengaliDigits[englishDigits.indexOf(digit)];
+    });
+}
+
+// Utility function to format numbers with commas
+function formatNumberWithCommas(number) {
+    return new Intl.NumberFormat('en-IN').format(number);
+}
 
 
 
@@ -116,6 +140,9 @@ export default function DataProvider({ children }) {
         costingList,
         mainBalance,
         handleLogout,
+        convertBengaliToEnglish,
+        convertEnglishToBengali,
+        formatNumberWithCommas,
     };
     return <ContextData.Provider value={info}>{children}</ContextData.Provider>
 }

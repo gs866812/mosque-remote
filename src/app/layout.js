@@ -13,22 +13,24 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  
+
   return (
     <html lang="en" data-theme="light">
       <body>
         <DataProvider>
           <div>
-            <header className='z-50'>
-              <Header />
-            </header>
-            <main className='z-0 py-5 mb-5'>
-              <ToastContainer position="top-right" />
-              {children}
-            </main>
-            <footer>
-              <Footer />
-            </footer>
+            <div>
+              <header className='z-50'>
+                <Header />
+              </header>
+              <main className='z-0'>
+                <ToastContainer position="top-right" />
+                {children}
+              </main>
+              <footer>
+                <Footer />
+              </footer>
+            </div>
           </div>
         </DataProvider>
       </body>
