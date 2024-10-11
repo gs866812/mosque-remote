@@ -15,7 +15,7 @@ export default function BalanceHeader() {
   return (
     <div>
       {formattedBalance &&
-        <h2 className='text-center text-[64px] font-bold'>{`বর্তমান সর্বমোট জমাকৃত অর্থঃ`} {formattedBalance}৳</h2>
+        <h2 className='text-center text-[45px] font-bold'>{`বর্তমান সর্বমোট জমাকৃত অর্থঃ`} {formattedBalance}৳</h2>
       }
     </div>
   )

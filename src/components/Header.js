@@ -39,14 +39,8 @@ export default function Header() {
 
     return (
         <div className='w-full'>
-            <div className='bg-gradient-to-r from-[#D39A41] to-[#F8E79A] h-[112px] flex justify-center items-center'>
-                <h2 className='font-poppins font-semibold text-[48px] leading-10 text-[#134834]'>
-                    بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
-                </h2>
-            </div>
-
-            <div className='bg-[#134834] text-white h-[141px] flex justify-center items-center'>
-                <h2 className='font-poppins font-bold text-[56px] leading-[67px]'>
+            <div className='bg-[#134834] text-white flex justify-center items-center'>
+                <h2 className='font-poppins font-bold text-[45px] py-2'>
                     চিথলিয়া কেন্দ্রীয় জামে মসজিদ
                 </h2>
             </div>

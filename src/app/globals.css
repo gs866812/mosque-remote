@@ -28,6 +28,11 @@
   
   .marquee-content {
     animation: scrollUp 20s linear infinite;
+    animation-play-state: running;
+  }
+
+  .marquee-content:hover {
+    animation-play-state: paused; /* Pause the scrolling when hovered */
   }
 
   
