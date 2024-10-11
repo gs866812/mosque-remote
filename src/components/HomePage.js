@@ -9,21 +9,20 @@ export default function HomePage() {
   const date = costingList[0]?.date;
   const currentCosting = costingList.filter(costing => costing.date === date);
 
+  // Duplicate the list of donors to create a continuous effect
+  const loopingDonorList = donorList.concat(donorList);
+
   return (
     <div className='w-full bg-[#f9f9ed] py-5 mx-auto'>
       <div>
         <BalanceHeader />
       </div>
 
-      <div className='w-[95%] border-[3px] border-[#D39A41] mx-auto mt-5 rounded-3xl shadow-[5px_0_10px_rgba(0,128,197,0.29)] flex justify-between items-start overflow-hidden h-[380px] relative'>
-        <hr className='border-[2px] border-[#D39A41] rotate-90 absolute bottom-0 left-[145px] w-[592px]' />
-        <hr className='border-[2px] border-[#D39A41] rotate-90 absolute bottom-0 left-[580px] w-[592px]' />
-        <hr className='border-[2px] border-[#D39A41] rotate-90 absolute bottom-0 left-[795px] w-[592px]' />
-        <hr className='border-[2px] border-[#D39A41] rotate-90 absolute bottom-0 left-[1268px] w-[592px]' />
+      <div className='w-[95%] border-[3px] border-[#D39A41] mx-auto mt-5 rounded-3xl shadow-[5px_0_10px_rgba(0,128,197,0.29)] flex justify-between items-start h-[450px]'>
 
         <div className='w-[60%] overflow-hidden'>
           {/* Fixed Header */}
-          <div className='bg-[#134834] text-white z-50'>
+          <div className='bg-[#134834] text-white rounded-tl-3xl'>
             <div className='flex text-[40px] text-center py-2'>
               <div className='text-start pl-5 w-[40%]'>দান দাতাগণের নাম</div>
               <div className='w-[40%]'>ঠিকানা</div>
@@ -32,12 +31,12 @@ export default function HomePage() {
           </div>
 
           {/* Scrollable Content */}
-          <div className='overflow-hidden h-[250px]'>
-            <div className='marquee-content'>
+          <div className='h-[340px] overflow-hidden'>
+            <div className='marquee-loop'>
               {
-                Array.isArray(donorList) && donorList.map((donor, index) => (
-                  <div key={index} className='flex text-[32px] font-bold py-[5px] border-b border-gray-200'>
-                    <div className='pl-5 w-[40%]'>{convertEnglishToBengali(index + 1)}. {donor.donorName}</div>
+                loopingDonorList.map((donor, index) => (
+                  <div key={index} className='flex text-[32px] font-bold py-2'>
+                    <div className='pl-5 w-[40%]'>{convertEnglishToBengali((index % donorList.length) + 1)}. {donor.donorName}</div>
                     <div className='w-[40%] text-center'>{donor.donorAddress}</div>
                     <div className='w-[20%] text-center'>
                       {convertEnglishToBengali(
@@ -55,7 +54,7 @@ export default function HomePage() {
 
         <div className='w-[40%] overflow-hidden'>
           {/* Fixed Header */}
-          <div className='bg-[#134834] text-white z-50'>
+          <div className='bg-[#134834] text-white rounded-tr-3xl'>
             <div className='flex text-[40px] text-center py-2'>
               <div className='w-[65%]'>খরচের বিবরণ</div>
               <div className='w-[35%]'>পরিমান</div>
@@ -68,12 +67,12 @@ export default function HomePage() {
           </div>
 
           {/* Scrollable Content */}
-          <div className='overflow-hidden h-[200px] mt-2'>
-            <div className='marquee-content'>
+          <div className='h-[280px] mt-2 overflow-hidden'>
+            <div className='marquee-loop'>
               {
                 currentCosting &&
-                currentCosting.map((costing, index) => (
-                  <div key={index} className='flex text-[20px] py-[5px] border-b border-gray-200'>
+                currentCosting.concat(currentCosting).map((costing, index) => (
+                  <div key={index} className='flex text-[20px] py-2 border border-gray-200'>
                     <div className='pl-5 w-[65%]'>{costing.expenseDescription}</div>
                     <div className='w-[35%] text-center'>
                       {convertEnglishToBengali(

@@ -4,6 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wdth,wght@62.5..100,100..900&family=Poppins:ital,wght@0,100;0,400;0,500;0,600;0,700;1,400&display=swap');
 
 
+
 .noto-serif-bengali {
     font-family: "Noto Serif Bengali", serif;
     font-optical-sizing: auto;
@@ -20,7 +21,7 @@
   html, body{
     font-family: "Noto Serif Bengali", serif;
   }
-
+/*  
   .marquee {
     overflow: hidden;
     position: relative;
@@ -32,11 +33,15 @@
   }
 
   .marquee-content:hover {
-    animation-play-state: paused; /* Pause the scrolling when hovered */
+    animation-play-state: paused; 
   }
 
+  .rfm-marquee{
+    height: auto !important;
+    width: auto !important;
+  }
   
-
+ 
 
   @keyframes scrollUp {
     0% {
@@ -46,6 +51,31 @@
       transform: translateY(-100%);
     }
   }
-  
+   */
 
+   .rounded_lt{
+    border-radius: 24px 0 0 0;
+   }
+   .rounded_rt{
+    border-radius: 0 24px 0 0;
+   }
+/* **************************************************** */
+.marquee-loop {
+  display: flex;
+  flex-direction: column;
+  animation: scroll-up 20s linear infinite;
+}
+
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.marquee-loop:hover {
+  animation-play-state: paused;
+}
 

@@ -21,7 +21,8 @@
     "react-dom": "^18",
     "react-fast-marquee": "^1.6.5",
     "react-slick": "^0.30.2",
-    "react-toastify": "^10.0.5"
+    "react-toastify": "^10.0.5",
+    "swiper": "^11.1.14"
   },
   "devDependencies": {
     "eslint": "^8",
