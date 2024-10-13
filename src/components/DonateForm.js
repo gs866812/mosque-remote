@@ -150,7 +150,6 @@ export default function DonateForm() {
                         <input
                             type='text'
                             name='donorContact'
-                            required
                             className='w-full p-2 border rounded'
                             placeholder='দাতার মোবাইল নাম্বার লিখুন...'
                         />

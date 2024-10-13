@@ -18,7 +18,6 @@ export default function RootLayout({ children }) {
     <html lang="en" data-theme="light">
       <body>
         <DataProvider>
-          <div>
             <div>
               <header className='z-50'>
                 <Header />
@@ -31,7 +30,6 @@ export default function RootLayout({ children }) {
                 <Footer />
               </footer>
             </div>
-          </div>
         </DataProvider>
       </body>
     </html>

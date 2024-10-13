@@ -63,7 +63,7 @@
 .marquee-loop {
   display: flex;
   flex-direction: column;
-  animation: scroll-up 20s linear infinite;
+  animation: scroll-up 15s linear infinite;
 }
 
 @keyframes scroll-up {

@@ -20,11 +20,11 @@ export async function middleware(req) {
     try {
       // Verify the token using jose
       await jwtVerify(token, SECRET_KEY);
-      console.log('Token verified successfully');
+      // console.log('Token verified successfully');
       return NextResponse.next(); // Token is valid, allow access
     } catch (error) {
       console.log('Token verification failed:', error.message); // Log verification errors
-      if (url.pathname.startsWith('/admin')) {
+      if (url.pathname.startsWith('/admin'))  {
         url.pathname = '/login';
         url.searchParams.set('redirect', req.nextUrl.pathname);
         return NextResponse.redirect(url);

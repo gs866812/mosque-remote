@@ -40,7 +40,7 @@ export default function Header() {
     return (
         <div className='w-full'>
             <div className='bg-[#134834] text-white flex justify-center items-center'>
-                <h2 className='font-poppins font-bold text-[45px] py-2'>
+                <h2 className='font-poppins font-bold lg:text-5xl py-5 text-xl'>
                     চিথলিয়া কেন্দ্রীয় জামে মসজিদ
                 </h2>
             </div>
