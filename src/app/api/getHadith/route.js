@@ -21,8 +21,6 @@ export async function GET() {
             },
         });
     } catch (error) {
-        console.error('Error fetching data:', error.message);
-
         // Return error response
         return new Response(JSON.stringify({ success: false, error: error.message }), {
             status: 500,

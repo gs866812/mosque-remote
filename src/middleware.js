@@ -23,7 +23,6 @@ export async function middleware(req) {
       // console.log('Token verified successfully');
       return NextResponse.next(); // Token is valid, allow access
     } catch (error) {
-      console.log('Token verification failed:', error.message); // Log verification errors
       if (url.pathname.startsWith('/admin'))  {
         url.pathname = '/login';
         url.searchParams.set('redirect', req.nextUrl.pathname);

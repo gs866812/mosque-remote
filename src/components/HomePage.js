@@ -91,7 +91,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className='my-10 lg:pt-[70px]'>
+      <div className='my-10 lg:pt-[47px]'>
         <PreFooter />
       </div>
     </div>
