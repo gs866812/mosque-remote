@@ -22,39 +22,12 @@ export async function POST(req) {
     const client = await clientPromise;
     const db = client.db("mosqueData");
     const expense = db.collection("expenseList");
-    const donationBalance = db.collection("donateBalanceList");
 
     const body = await req.json(); // Parse the incoming request body
 
     // Insert the expense data into MongoDB (as Bengali numerals from user input)
     const result = await expense.insertOne(body);
 
-    // Convert expenseAmount from Bengali numerals to English numerals for calculation
-    const expenseAmountInEnglish = convertBengaliToEnglish(body.expenseAmount);
-    const expenseAmount = parseFloat(expenseAmountInEnglish); // Convert to float for calculations
-
-    // Check if the donation balance exists
-    const isExist = await donationBalance.findOne({});
-    
-    if (!isExist) {
-      // No balance exists, create a new one and store the totalBalance as Bengali numerals
-      await donationBalance.insertOne({
-        totalBalance: convertEnglishToBengali(- expenseAmountInEnglish), // Convert back to Bengali numerals
-      });
-    } else {
-      // Fetch the current total balance (in Bengali numerals) and convert it to English numerals for calculation
-      const currentBalanceInBengali = isExist.totalBalance;
-      const currentBalanceInEnglish = parseFloat(convertBengaliToEnglish(currentBalanceInBengali));
-
-      // Subtract the expense amount and convert the result back to Bengali numerals
-      const updatedBalanceInEnglish = currentBalanceInEnglish - expenseAmount;
-      const updatedBalanceInBengali = convertEnglishToBengali(updatedBalanceInEnglish);
-
-      // Update the total balance in Bengali numerals
-      await donationBalance.updateOne({}, {
-        $set: { totalBalance: updatedBalanceInBengali },
-      });
-    }
 
     // Return success response
     return new Response(JSON.stringify({ success: true, data: result }), {

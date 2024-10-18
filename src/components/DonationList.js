@@ -31,11 +31,11 @@ function formatNumberWithCommas(number) {
 }
 
 export default function DonationList() {
-    const { donorList } = useContext(ContextData);
+    const { donationList } = useContext(ContextData);
 
     return (
         <div className='space-y-5 pr-2'>
-            {Array.isArray(donorList) && donorList.map((donor, index) => (
+            {Array.isArray(donationList) && donationList.map((donor, index) => (
                 <div className='flex items-center mt-2 w-full' key={index}>
                     {/* Convert index to Bengali numerals */}
                     <p className='font-bold w-[50%]'>

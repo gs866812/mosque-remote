@@ -1,18 +1,17 @@
-export const dynamic = 'force-dynamic';
+// /api/get/incomeCategory/route.js
 import clientPromise from "@/lib/mongodb";
-
 
 export async function GET() {
   try {
     const client = await clientPromise;
     const db = client.db("mosqueData");
-    const donationBalance = db.collection("donateBalanceList");
+    const incomeCategory = db.collection("incomeCategories");
 
-    // Insert the donation data into MongoDB (store as Bengali numerals from user input)
-    const result = await donationBalance.find().toArray();
+    // Fetch all income categories
+    const categories = await incomeCategory.find().toArray();
 
     // Return success response
-    return new Response(JSON.stringify(result), {
+    return new Response(JSON.stringify(categories), {
       status: 200,
       headers: {
         "Content-Type": "application/json",
@@ -22,9 +21,6 @@ export async function GET() {
     // Return error response
     return new Response(JSON.stringify({ success: false, error: error.message }), {
       status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
     });
   }
 }

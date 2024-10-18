@@ -2,31 +2,123 @@
 import moment from "moment";
 import { toast } from "react-toastify";
 import 'moment/locale/bn-bd';
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ContextData } from "@/app/DataProvider";
+import AddCategory from "./AddCategory";
 moment.locale('bn-bd');
 
-
 export default function DonateForm() {
-    const { triggerReFetch, handleLogout } = useContext(ContextData);
+    const { triggerReFetch, handleLogout, reFetch, setRefetch } = useContext(ContextData);
+    const [donorID, setDonorID] = useState('');
+    const [donorName, setDonorName] = useState('');
+    const [donorAddress, setDonorAddress] = useState('');
+    const [donorContact, setDonorContact] = useState('');
+    const [incomeCategories, setIncomeCategories] = useState([]);
+    const [expenseCategories, setExpenseCategories] = useState([]);
+    const [selectedIncomeCategory, setSelectedIncomeCategory] = useState('');
+    const [selectedExpenseCategory, setSelectedExpenseCategory] = useState('');
+    console.log(incomeCategories);
 
+
+    // Fetch Donor Info by ID
+    useEffect(() => {
+        const fetchDonorInfo = async () => {
+            if (donorID) {
+                try {
+                    const response = await fetch(`/api/get/donorInfo?id=${donorID}`); // Use the correct API route and pass donorID
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data) {
+                            setDonorName(data.donorName || '');
+                            setDonorAddress(data.donorAddress || '');
+                            setDonorContact(data.donorContact || '');
+                        } else {
+                            setDonorName('');
+                            setDonorAddress('');
+                            setDonorContact('');
+                        }
+                    } else {
+                        setDonorName('');
+                        setDonorAddress('');
+                        setDonorContact('');
+                    }
+                } catch (error) {
+                    console.error('Error fetching donor info:', error);
+                    setDonorName('');
+                    setDonorAddress('');
+                    setDonorContact('');
+                }
+            } else {
+                setDonorName('');
+                setDonorAddress('');
+                setDonorContact('');
+            }
+        };
+
+        fetchDonorInfo();
+    }, [donorID]);
+
+
+    // Fetch Income Categories
+    useEffect(() => {
+        const fetchIncomeCategories = async () => {
+            try {
+                const response = await fetch('/api/get/incomeCategory');
+                if (response.ok) {
+                    const data = await response.json();
+                    setIncomeCategories(data);
+                }
+            } catch (error) {
+                toast.error('Error fetching income categories:', error);
+            }
+        };
+
+        fetchIncomeCategories();
+    }, [reFetch]);
+
+    // Fetch Expense Categories
+    useEffect(() => {
+        const fetchExpenseCategories = async () => {
+            try {
+                const response = await fetch('/api/get/expenseCategory');
+                if (response.ok) {
+                    const data = await response.json();
+                    setExpenseCategories(data);
+                }
+            } catch (error) {
+                toast.error('Error fetching income categories:', error);
+            }
+        };
+
+        fetchExpenseCategories();
+    }, [reFetch]);
 
     // Handle Form-1 Submission (POST request for Form-1)
     const handleForm1Submit = async (e) => {
         e.preventDefault();
 
         const form = e.target;
-        const donorName = form.donorName.value;
-        const donorContact = form.donorContact.value;
-        const donorAddress = form.donorAddress.value;
         const donationAmount = form.donationAmount.value;
+        const paymentOption = form.paymentOption.value;
+        const references = form.references.value;
         const date = moment(new Date()).format('DD/MM/YYYY');
         const month = moment(new Date()).format('MMMM');
 
-        const donorInfo = { donorName, donorContact, donorAddress, donationAmount, date, month };
+        const donorInfo = {
+            donorID,
+            donorName,
+            donorAddress,
+            donorContact,
+            donationAmount,
+            paymentOption,
+            references,
+            date,
+            month,
+            incomeCategory: selectedIncomeCategory
+        };
 
         try {
-            const response = await fetch("/api/donations", {
+            const response = await fetch("/api/post/donations", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -39,7 +131,12 @@ export default function DonateForm() {
             if (response.ok) {
                 // Optionally reset form or show success message
                 form.reset();
+                setDonorID('');
+                setDonorName('');
+                setDonorAddress('');
+                setSelectedIncomeCategory('');
                 triggerReFetch();
+                setRefetch(!reFetch);
                 toast.success('উক্ত দানটি জমা হয়েছে ');
             } else {
                 toast.error("উক্ত দানটি জমা হয়নি", data.error);
@@ -47,9 +144,9 @@ export default function DonateForm() {
         } catch (error) {
             toast.error("একটি সমস্যা হয়েছে", error);
         }
-
-
     };
+
+
     // Handle Form-2 Submission (POST request for Form-2)
     const handleForm2Submit = async (e) => {
         e.preventDefault();
@@ -60,10 +157,10 @@ export default function DonateForm() {
         const date = moment(new Date()).format('DD/MM/YYYY');
         const month = moment(new Date()).format('MMMM');
 
-        const expenseInfo = { expenseDescription, expenseAmount, date, month };
+        const expenseInfo = { expenseDescription, expenseAmount, date, month, expenseCategory: selectedExpenseCategory };
 
         try {
-            const response = await fetch("/api/expense", {
+            const response = await fetch("/api/post/expense", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -77,6 +174,7 @@ export default function DonateForm() {
                 // Optionally reset form or show success message
                 form.reset();
                 triggerReFetch();
+                setRefetch(!reFetch);
                 toast.success('খরচটি সম্পন্ন হয়েছে ');
             } else {
                 toast.error("খরচটি সম্পন্ন হয়নি", data.error);
@@ -87,7 +185,8 @@ export default function DonateForm() {
 
 
     };
-    // Handle Form-3 Submission (POST request for Form-2)
+
+    // Handle Form-3 Submission (POST request for Form-3)
     const handleForm3Submit = async (e) => {
         e.preventDefault();
 
@@ -98,7 +197,7 @@ export default function DonateForm() {
         const hadithInfo = { hadithList, date };
 
         try {
-            const response = await fetch("/api/hadith", {
+            const response = await fetch("/api/post/hadith", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -112,6 +211,7 @@ export default function DonateForm() {
                 // Optionally reset form or show success message
                 form.reset();
                 triggerReFetch();
+                setRefetch(!reFetch);
                 toast.success('হাদীসটি যুক্ত হয়েছে ');
             } else {
                 toast.error("হাদীসটি যুক্ত হয়নি", data.error);
@@ -123,35 +223,40 @@ export default function DonateForm() {
 
     };
 
-
     return (
         <div className='mx-auto w-[80%]'>
+            <div className="flex justify-center py-2">
+                <AddCategory />
+            </div>
             <div className='flex justify-end'>
                 <button onClick={handleLogout} className='bg-red-500 rounded-md text-white py-1 px-3 mt-3'>Log out</button>
             </div>
 
-            <div className='flex flex-col items-start justify-between px-5 gap-5 my-10'>
+            <div className='flex flex-col items-start justify-between px-5 gap-5 my-5'>
                 {/* Form-1 */}
                 <form onSubmit={handleForm1Submit} className='w-full p-5 border-green-600 border mt-5 rounded-lg'>
                     <h2 className='text-xl font-bold mb-4'>দাতার বিবরণ</h2>
+
                     <div className='mb-4'>
-                        <label className='block mb-2'>দাতার নাম</label>
+                        <label className='block mb-2'>আইডি</label>
                         <input
                             type='text'
-                            name='donorName'
-                            required
+                            value={donorID}
+                            onChange={(e) => setDonorID(e.target.value)}
                             className='w-full p-2 border rounded'
-                            placeholder='দাতার নাম লিখুন...'
+                            placeholder='আইডি লিখুন...(অপশনাল)'
                         />
                     </div>
 
                     <div className='mb-4'>
-                        <label className='block mb-2'>দাতার মোবাইল নাম্বার</label>
+                        <label className='block mb-2'>দাতার নাম</label>
                         <input
                             type='text'
-                            name='donorContact'
+                            value={donorName}
+                            onChange={(e) => setDonorName(e.target.value)}
                             className='w-full p-2 border rounded'
-                            placeholder='দাতার মোবাইল নাম্বার লিখুন...'
+                            placeholder='দাতার নাম লিখুন...'
+                            required
                         />
                     </div>
 
@@ -159,11 +264,39 @@ export default function DonateForm() {
                         <label className='block mb-2'>দাতার ঠিকানা</label>
                         <input
                             type='text'
-                            name='donorAddress'
-                            required
+                            value={donorAddress}
+                            onChange={(e) => setDonorAddress(e.target.value)}
                             className='w-full p-2 border rounded'
                             placeholder='দাতার ঠিকানা লিখুন...'
+                            required
                         />
+                    </div>
+                    <div className='mb-4'>
+                        <label className='block mb-2'>দাতার মোবাইল নাম্বার</label>
+                        <input
+                            type='text'
+                            value={donorContact}
+                            onChange={(e) => setDonorContact(e.target.value)}
+                            className='w-full p-2 border rounded'
+                            placeholder='দাতার মোবাইল নাম্বার...(অপশনাল)'
+                        />
+                    </div>
+
+                    <div className='mb-4'>
+                        <label className='block mb-2'>আয়ের ক্যাটাগরি</label>
+                        <select
+                            value={selectedIncomeCategory}
+                            onChange={(e) => setSelectedIncomeCategory(e.target.value)}
+                            className='w-full p-2 border rounded'
+                            required
+                        >
+                            <option value=''>ক্যাটাগরি নির্বাচন করুন...</option>
+                            {incomeCategories.map((category, index) => (
+                                <option key={index} value={category.category}>
+                                    {category.category}
+                                </option>
+                            ))}
+                        </select>
                     </div>
 
                     <div className='mb-4'>
@@ -174,6 +307,27 @@ export default function DonateForm() {
                             required
                             className='w-full p-2 border rounded'
                             placeholder='মোট টাকার পরিমান লিখুন...'
+                        />
+                    </div>
+
+                    <div className='mb-4'>
+                        <label className='block mb-2'>পেমেন্ট অপশন</label>
+                        <select name='paymentOption' className='w-full p-2 border rounded' required>
+                            <option value='নগদ'>নগদ</option>
+                            <option value='বিকাশ'>বিকাশ</option>
+                            <option value='ব্যাংক একাউন্ট'>ব্যাংক একাউন্ট</option>
+                            <option value='হাতে গ্রহণ'>হাতে গ্রহণ</option>
+                        </select>
+                    </div>
+
+                    <div className='mb-4'>
+                        <label className='block mb-2'>রেফারেন্স (আদায়কারী)</label>
+                        <input
+                            type='text'
+                            name='references'
+                            className='w-full p-2 border rounded'
+                            placeholder='রেফারেন্স লিখুন...'
+                            required
                         />
                     </div>
 
@@ -195,6 +349,22 @@ export default function DonateForm() {
                             className='w-full p-2 border rounded'
                             placeholder='খরচের বিবরণ লিখুন...'
                         />
+                    </div>
+                    <div className='mb-4'>
+                        <label className='block mb-2'>ব্যয়ের ক্যাটাগরি</label>
+                        <select
+                            value={selectedExpenseCategory}
+                            onChange={(e) => setSelectedExpenseCategory(e.target.value)}
+                            className='w-full p-2 border rounded'
+                            required
+                        >
+                            <option value=''>ক্যাটাগরি নির্বাচন করুন...</option>
+                            {expenseCategories.map((category, index) => (
+                                <option key={index} value={category.category}>
+                                    {category.category}
+                                </option>
+                            ))}
+                        </select>
                     </div>
 
                     <div className='mb-4'>
@@ -219,7 +389,7 @@ export default function DonateForm() {
                     <h2 className='text-xl font-bold mb-4'>হাদীস সমূহ</h2>
                     <div className='mb-4'>
                         <label className='block mb-2'>
-                        <textarea name="hadithList" rows="4" className='w-full p-2 border rounded' placeholder='হাদীস লিখুন ...' />
+                            <textarea name="hadithList" rows="4" className='w-full p-2 border rounded' placeholder='হাদীস লিখুন ...' />
                         </label>
                     </div>
 
@@ -228,7 +398,6 @@ export default function DonateForm() {
                         জমা দিন
                     </button>
                 </form>
-
             </div>
         </div>
     );

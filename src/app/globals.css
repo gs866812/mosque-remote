@@ -5,6 +5,8 @@
 
 
 
+
+
 .noto-serif-bengali {
     font-family: "Noto Serif Bengali", serif;
     font-optical-sizing: auto;
@@ -21,37 +23,7 @@
   html, body{
     font-family: "Noto Serif Bengali", serif;
   }
-/*  
-  .marquee {
-    overflow: hidden;
-    position: relative;
-  }
-  
-  .marquee-content {
-    animation: scrollUp 20s linear infinite;
-    animation-play-state: running;
-  }
 
-  .marquee-content:hover {
-    animation-play-state: paused; 
-  }
-
-  .rfm-marquee{
-    height: auto !important;
-    width: auto !important;
-  }
-  
- 
-
-  @keyframes scrollUp {
-    0% {
-      transform: translateY(100%);
-    }
-    100% {
-      transform: translateY(-100%);
-    }
-  }
-   */
 
    .rounded_lt{
     border-radius: 24px 0 0 0;
@@ -63,7 +35,7 @@
 .marquee-loop {
   display: flex;
   flex-direction: column;
-  animation: scroll-up 15s linear infinite;
+  animation: scroll-up 40s linear infinite;
 }
 
 @keyframes scroll-up {

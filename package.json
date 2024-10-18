@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "cookie": "^0.7.2",
     "dotenv": "^16.4.5",
     "framer-motion": "^11.11.7",
@@ -22,9 +24,11 @@
     "react-fast-marquee": "^1.6.5",
     "react-slick": "^0.30.2",
     "react-toastify": "^10.0.5",
+    "sweetalert2": "^11.14.3",
     "swiper": "^11.1.14"
   },
   "devDependencies": {
+    "daisyui": "^4.12.13",
     "eslint": "^8",
     "eslint-config-next": "14.2.14",
     "postcss": "^8",

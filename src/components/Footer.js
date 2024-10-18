@@ -12,7 +12,7 @@ export default function Footer() {
 
     return (
 
-        <div className='w-full bg-[#134834] text-white py-1'>
+        <div className='w-full bg-[#134834] text-white'>
             <Swiper
                 spaceBetween={10}
                 centeredSlides={true}
@@ -27,7 +27,7 @@ export default function Footer() {
             >
                 {hadithList && hadithList.map((hadith, idx) => 
                 <SwiperSlide key={idx}>
-                    <p className='text-2xl py-1'>
+                    <p className='text-[18px] py-2'>
                     {`${hadith.hadithList}`}
                 </p>
                 </SwiperSlide>

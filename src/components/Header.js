@@ -26,21 +26,21 @@ function formatNumberWithCommas(number) {
 }
 
 export default function Header() {
-    const { mainBalance } = useContext(ContextData);
+    const { totalIncome } = useContext(ContextData);
 
-    // Check if mainBalance is available and contains the required data
-    const formattedBalance = mainBalance && Array.isArray(mainBalance) && mainBalance[0]?.totalBalance
+    // Check if totalIncome is available and contains the required data
+    const formattedBalance = totalIncome && Array.isArray(totalIncome) && totalIncome[0]?.totalBalance
         ? convertEnglishToBengali(
             formatNumberWithCommas(
-                parseFloat(convertBengaliToEnglish(mainBalance[0].totalBalance))
+                parseFloat(convertBengaliToEnglish(totalIncome[0].totalBalance))
             )
         )
-        : null; // Handle the case when mainBalance is not available
+        : null; // Handle the case when totalIncome is not available
 
     return (
         <div className='w-full'>
             <div className='bg-[#134834] text-white flex justify-center items-center'>
-                <h2 className='font-poppins font-bold lg:text-5xl py-5 text-xl'>
+                <h2 className='font-poppins font-bold lg:text-4xl py-3 text-xl'>
                     চিথলিয়া কেন্দ্রীয় জামে মসজিদ
                 </h2>
             </div>

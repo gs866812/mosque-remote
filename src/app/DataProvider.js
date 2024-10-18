@@ -7,10 +7,10 @@ export const ContextData = createContext(null);
 
 export default function DataProvider({ children }) {
     const [loading, setLoading] = useState(true);
-    const [reFetch, setReFetch] = useState(false);
-    const [donorList, setDonorList] = useState([]);
+    const [reFetch, setRefetch] = useState(false);
+    const [donationList, setDonationList] = useState([]);
     const [costingList, setCostingList] = useState([]);
-    const [mainBalance, setMainBalance] = useState(0);
+    const [totalIncome, setTotalIncome] = useState(0);
     const [hadithList, setHadithList] = useState([]);
     const router = useRouter();
 
@@ -44,7 +44,7 @@ function formatNumberWithCommas(number) {
     useEffect(() => {
         const handleStorageChange = (event) => {
             if (event.key === 'reFetch' && event.newValue === 'true') {
-                setReFetch((prev) => !prev);
+                setRefetch((prev) => !prev);
             }
         };
 
@@ -57,7 +57,7 @@ function formatNumberWithCommas(number) {
 
     // Use localStorage to trigger re-fetch across tabs
     const triggerReFetch = () => {
-        setReFetch((prev) => !prev);
+        setRefetch((prev) => !prev);
         localStorage.setItem('reFetch', 'true');
         setTimeout(() => {
             localStorage.removeItem('reFetch'); // Clean up to avoid conflicts
@@ -67,7 +67,7 @@ function formatNumberWithCommas(number) {
 
     useEffect(() => {
         // Fetch donation data when the component mounts
-        fetch("/api/donorList")
+        fetch("/api/get/donationList")
             .then((response) => {
                 if (!response.ok) {
                     toast.error("একটি সমস্যা হয়েছে");
@@ -76,7 +76,7 @@ function formatNumberWithCommas(number) {
                 return response.json();
             })
             .then((data) => {
-                setDonorList(data); // Store fetched data in the state
+                setDonationList(data); // Store fetched data in the state
             })
             .catch((err) => {
                 toast.error(err.message); // Show error if fetching fails
@@ -86,7 +86,7 @@ function formatNumberWithCommas(number) {
 
     useEffect(() => {
         // Fetch costing data when the component mounts
-        fetch("/api/costingList")
+        fetch("/api/get/costingList")
             .then((response) => {
                 if (!response.ok) {
                     toast.error("একটি সমস্যা হয়েছে");
@@ -105,7 +105,7 @@ function formatNumberWithCommas(number) {
 
     useEffect(() => {
         // Fetch for main balance
-        fetch("/api/mainBalance")
+        fetch("/api/get/totalIncome")
             .then((response) => {
                 if (!response.ok) {
                     toast.error("একটি সমস্যা হয়েছে");
@@ -114,7 +114,7 @@ function formatNumberWithCommas(number) {
                 return response.json();
             })
             .then((data) => {
-                setMainBalance(data); // Store fetched data in the state
+                setTotalIncome(data); // Store fetched data in the state
             })
             .catch((err) => {
                 toast.error(err.message); // Show error if fetching fails
@@ -124,7 +124,7 @@ function formatNumberWithCommas(number) {
 
     useEffect(() => {
         // Fetch for hadith
-        fetch("/api/getHadith")
+        fetch("/api/get/hadith")
             .then((response) => {
                 if (!response.ok) {
                     toast.error("একটি সমস্যা হয়েছে");
@@ -142,7 +142,7 @@ function formatNumberWithCommas(number) {
 
     // Logout
     const handleLogout = async () => {
-        await fetch('/api/logout', {
+        await fetch('/api/post/logout', {
             method: 'POST',
         });
 
@@ -154,11 +154,11 @@ function formatNumberWithCommas(number) {
 
     const info = {
         reFetch,
-        setReFetch,
-        donorList,
+        setRefetch,
+        donationList,
         triggerReFetch,
         costingList,
-        mainBalance,
+        totalIncome,
         handleLogout,
         convertBengaliToEnglish,
         convertEnglishToBengali,

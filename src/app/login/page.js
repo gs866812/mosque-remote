@@ -18,7 +18,7 @@ export default function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
 
-        const res = await fetch('/api/login', {
+        const res = await fetch('/api/post/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,14 +35,14 @@ export default function Login() {
     };
 
     return (
-        <div className="max-w-md mx-auto p-8 rounded-lg my-20">
-            <form onSubmit={handleLogin}>
+        <div className="mx-auto p-8 rounded-lg">
+            <form onSubmit={handleLogin} className='lg:border-[#e5af58] lg:border-2 lg:py-20 lg:px-20 lg:w-1/2 mx-auto rounded-xl'>
                 <div className="relative mb-4">
                     <i className="absolute left-3 top-1/2 transform -translate-y-1/2 text-xl text-gray-500">&#9993;</i>
                     <input
                         type="email"
                         placeholder="Email"
-                        className="w-full py-3 pl-10 pr-4 rounded-lg bg-gray-200 outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full py-4 lg:text-2xl pl-10 pr-4 rounded-lg bg-gray-200 outline-none focus:ring-2 focus:ring-[#e5af58]"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
@@ -53,7 +53,7 @@ export default function Login() {
                     <input
                         type="password"
                         placeholder="Password"
-                        className="w-full py-3 pl-10 pr-4 rounded-lg bg-gray-200 outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full py-4 pl-10 pr-4 rounded-lg bg-gray-200 outline-none focus:ring-2 focus:ring-[#e5af58]"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
