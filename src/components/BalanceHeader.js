@@ -22,8 +22,8 @@ export default function BalanceHeader() {
   // Calculate total costing (in Bengali)
   const totalCosting = costingBanglaToEnglish.length > 0
     ? convertEnglishToBengali(
-        costingBanglaToEnglish.reduce((acc, amount) => acc + amount, 0)
-      )
+      costingBanglaToEnglish.reduce((acc, amount) => acc + amount, 0)
+    )
     : '০';
 
   // Ensure totalIncome is properly defined and parse it
@@ -51,7 +51,7 @@ export default function BalanceHeader() {
           <span>{`সর্বমোট আয়ঃ`} <span className='text-green-600'>{formattedIncomeBalance} ৳</span></span>
 
           <span>{`সর্বমোট খরচঃ`} <span className='text-red-500'>{totalCosting} ৳ </span></span>
-          
+
           <span>{`অবশিষ্ট অর্থঃ`} <span className='text-yellow-600'>{formattedRestAmount} ৳ </span></span>
         </h2>
       }

@@ -8,7 +8,7 @@ import AddCategory from "./AddCategory";
 moment.locale('bn-bd');
 
 export default function DonateForm() {
-    const { triggerReFetch, handleLogout, reFetch, setRefetch } = useContext(ContextData);
+    const { triggerReFetch, reFetch, setRefetch } = useContext(ContextData);
     const [donorID, setDonorID] = useState('');
     const [donorName, setDonorName] = useState('');
     const [donorAddress, setDonorAddress] = useState('');
@@ -17,7 +17,8 @@ export default function DonateForm() {
     const [expenseCategories, setExpenseCategories] = useState([]);
     const [selectedIncomeCategory, setSelectedIncomeCategory] = useState('');
     const [selectedExpenseCategory, setSelectedExpenseCategory] = useState('');
-    console.log(incomeCategories);
+    
+    console.log("Category:", incomeCategories);
 
 
     // Fetch Donor Info by ID
@@ -228,10 +229,6 @@ export default function DonateForm() {
             <div className="flex justify-center py-2">
                 <AddCategory />
             </div>
-            <div className='flex justify-end'>
-                <button onClick={handleLogout} className='bg-red-500 rounded-md text-white py-1 px-3 mt-3'>Log out</button>
-            </div>
-
             <div className='flex flex-col items-start justify-between px-5 gap-5 my-5'>
                 {/* Form-1 */}
                 <form onSubmit={handleForm1Submit} className='w-full p-5 border-green-600 border mt-5 rounded-lg'>
@@ -327,7 +324,6 @@ export default function DonateForm() {
                             name='references'
                             className='w-full p-2 border rounded'
                             placeholder='রেফারেন্স লিখুন...'
-                            required
                         />
                     </div>
 

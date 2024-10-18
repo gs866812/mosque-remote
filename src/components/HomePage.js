@@ -64,7 +64,7 @@ export default function HomePage() {
 
           {/* Scrollable Content */}
           <div className='lg:h-[242px] h-[217px] overflow-hidden relative'>
-          <div className='border-r-[3px] absolute border-[#D39A41] lg:h-[270px] h-[200px] left-[65%] top-0'></div>
+          <div className='border-r-[3px] absolute border-[#D39A41] lg:h-[270px] h-[217px] left-[65%] top-0'></div>
             <div className={costingList?.length > 5 ? 'marquee-loop' : ''}>
               {
                 costingList &&

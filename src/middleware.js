@@ -20,10 +20,9 @@ export async function middleware(req) {
     try {
       // Verify the token using jose
       await jwtVerify(token, SECRET_KEY);
-      // console.log('Token verified successfully');
       return NextResponse.next(); // Token is valid, allow access
     } catch (error) {
-      if (url.pathname.startsWith('/admin'))  {
+      if (url.pathname.startsWith('/admin')) {
         url.pathname = '/login';
         url.searchParams.set('redirect', req.nextUrl.pathname);
         return NextResponse.redirect(url);
@@ -35,5 +34,5 @@ export async function middleware(req) {
 }
 
 export const config = {
-  matcher: ['/admin'], // Define protected routes here
+  matcher: ['/admin/:path*'], // Protect all routes under /admin
 };
