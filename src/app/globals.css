@@ -32,10 +32,15 @@
     border-radius: 0 24px 0 0;
    }
 /* **************************************************** */
+.marquee-container {
+  position: relative;
+  overflow: hidden;
+}
+
 .marquee-loop {
   display: flex;
   flex-direction: column;
-  animation: scroll-up 40s linear infinite;
+  animation: scroll-up 120s linear infinite;
 }
 
 @keyframes scroll-up {
@@ -47,7 +52,8 @@
   }
 }
 
-.marquee-loop:hover {
+/* Pause animation on hover */
+.marquee-container:hover .marquee-loop {
   animation-play-state: paused;
 }
 

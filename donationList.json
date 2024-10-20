@@ -1,0 +1,282 @@
+[
+  {
+    "_id": "67126e4c7bbba8263fe1fcff",
+    "expenseDescription": "ভিক্সল- ২ টি",
+    "expenseAmount": "১০০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "67126ea27bbba8263fe1fd01",
+    "expenseDescription": "সাবান ২ টি",
+    "expenseAmount": "২০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "67126e817bbba8263fe1fd00",
+    "expenseDescription": "হারপিক- ১ টি",
+    "expenseAmount": "১৩০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "67126f987bbba8263fe1fd02",
+    "expenseDescription": "রাজুর হাদিয়া ",
+    "expenseAmount": "৫০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "671270997bbba8263fe1fd05",
+    "expenseDescription": "ফ্লোর ব্রাশ - ২ টি",
+    "expenseAmount": "৪০০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "671270d87bbba8263fe1fd06",
+    "expenseDescription": "ওয়েপার - ২ টি",
+    "expenseAmount": "৩০০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "671270d87bbba8263fe1fd07",
+    "expenseDescription": "ওয়েপার - ২ টি",
+    "expenseAmount": "৩০০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "671271b37bbba8263fe1fd08",
+    "expenseDescription": "ড্রাই মফ - ১ টি",
+    "expenseAmount": "৪৫০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "671271c17bbba8263fe1fd09",
+    "expenseDescription": "লঙ ঝাড়ু SS- ১ টি",
+    "expenseAmount": "২৫০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "671271d27bbba8263fe1fd0a",
+    "expenseDescription": "লঙ ঝাড়ু কাট- ১ টি",
+    "expenseAmount": "২০০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "671271dd7bbba8263fe1fd0b",
+    "expenseDescription": "ফুল ঝাড়ু - ১ টি",
+    "expenseAmount": "১৭০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "671271ef7bbba8263fe1fd0c",
+    "expenseDescription": "ফুল ঝাড়ু ss- ১ টি",
+    "expenseAmount": "১৮০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "671271fc7bbba8263fe1fd0d",
+    "expenseDescription": "লাইজল - ১ টি",
+    "expenseAmount": "২৫০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "671272087bbba8263fe1fd0e",
+    "expenseDescription": "প্লাট মফ - ১ টি",
+    "expenseAmount": "৭০০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "671278567bbba8263fe1fd39",
+    "expenseDescription": "রাজু হাদিয়া",
+    "expenseAmount": "৫০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "6712788c7bbba8263fe1fd3a",
+    "expenseDescription": "ভিক্সল ২ টি",
+    "expenseAmount": "১০০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "671278d37bbba8263fe1fd3b",
+    "expenseDescription": "সাবান ৩ টি",
+    "expenseAmount": "৩০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "671279a07bbba8263fe1fd3c",
+    "expenseDescription": "পাউডার ১ টি",
+    "expenseAmount": "২০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "67127a3a7bbba8263fe1fd3e",
+    "expenseDescription": "কলম+ খাতা",
+    "expenseAmount": "২৩২",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "স্টেশনারি"
+  },
+  {
+    "_id": "67127a5f7bbba8263fe1fd3f",
+    "expenseDescription": "খাতা ক্রয়",
+    "expenseAmount": "২৫০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "স্টেশনারি"
+  },
+  {
+    "_id": "67127a807bbba8263fe1fd40",
+    "expenseDescription": "ফুল ঝাড়ূ ২ টি ",
+    "expenseAmount": "১৮০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "67127b2e7bbba8263fe1fd42",
+    "expenseDescription": "সিমেন্ট ক্রয় ৬ বস্তা",
+    "expenseAmount": "৩৩০০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "কনস্ট্রাকশন খরচ"
+  },
+  {
+    "_id": "67127b9d7bbba8263fe1fd44",
+    "expenseDescription": "মাইক হর্ন মেরামত",
+    "expenseAmount": "১২০০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "ইলেকট্রিসিটি খরচ"
+  },
+  {
+    "_id": "67127bb27bbba8263fe1fd45",
+    "expenseDescription": "বালি ক্রয়",
+    "expenseAmount": "২৫০০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "কনস্ট্রাকশন খরচ"
+  },
+  {
+    "_id": "67127c8f7bbba8263fe1fd49",
+    "expenseDescription": "রাজমিস্ত্রি  ৪ জন ",
+    "expenseAmount": "২২০০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "লেভার খরচ"
+  },
+  {
+    "_id": "67127cb27bbba8263fe1fd4a",
+    "expenseDescription": "বালি চালা নেট ৩ ফিট",
+    "expenseAmount": "২৪০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "কনস্ট্রাকশন খরচ"
+  },
+  {
+    "_id": "67127cc77bbba8263fe1fd4b",
+    "expenseDescription": "ফুল ঝাড়ু - ১ টি",
+    "expenseAmount": "৫০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "67127cdf7bbba8263fe1fd4c",
+    "expenseDescription": "পিলাস্তার ফোম ১ টি",
+    "expenseAmount": "৫০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "কনস্ট্রাকশন খরচ"
+  },
+  {
+    "_id": "67127d027bbba8263fe1fd4d",
+    "expenseDescription": "রাজমিস্ত্রি  ৩ জন ",
+    "expenseAmount": "১৭০০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "লেভার খরচ"
+  },
+  {
+    "_id": "67127d327bbba8263fe1fd4e",
+    "expenseDescription": "রাজমিস্ত্রি  ৫ জন ",
+    "expenseAmount": "২৮০০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "লেভার খরচ"
+  },
+  {
+    "_id": "671284777bbba8263fe1fd69",
+    "expenseDescription": "মাল্টিপ্লাগ",
+    "expenseAmount": "৩০০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "ইলেকট্রিসিটি খরচ"
+  },
+  {
+    "_id": "671284867bbba8263fe1fd6a",
+    "expenseDescription": "সারফেক্সেল",
+    "expenseAmount": "৩০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "671284937bbba8263fe1fd6b",
+    "expenseDescription": "টিসু",
+    "expenseAmount": "১০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  },
+  {
+    "_id": "6712849f7bbba8263fe1fd6c",
+    "expenseDescription": "টেপ",
+    "expenseAmount": "২৫",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "ইলেকট্রিসিটি খরচ"
+  },
+  {
+    "_id": "671284ab7bbba8263fe1fd6d",
+    "expenseDescription": "রাজুর হাদিয়া",
+    "expenseAmount": "৫০",
+    "date": "১৮/১০/২০২৪",
+    "month": "অক্টোবর",
+    "expenseCategory": "মসিজদ ক্লিন"
+  }
+]

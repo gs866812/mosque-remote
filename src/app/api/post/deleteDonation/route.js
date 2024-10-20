@@ -23,7 +23,6 @@ export async function POST(req) {
     const client = await clientPromise;  // Connect to MongoDB
     const db = client.db("mosqueData");  // Use the correct database
     const donationCollection = db.collection("donationList");  // Collection name
-    const totalIncome = db.collection("totalIncomeList");
     const donorInfo = db.collection("donorList");
 
     const { id } = await req.json();  // Get the id from the request body
@@ -52,23 +51,6 @@ export async function POST(req) {
     console.log('Deleting donation with amount (English):', donationAmountInEnglish);
     console.log('Donor ID:', donation.donorID);
 
-    // Step 1: Retrieve the current totalIncome in Bengali numerals
-    const incomeData = await totalIncome.findOne({});
-    const totalIncomeInBengali = incomeData.totalIncome;
-
-    // Convert totalIncome from Bengali to English numerals and parse as float
-    const totalIncomeInEnglish = parseFloat(convertBengaliToEnglish(totalIncomeInBengali));
-
-    // Step 2: Calculate new total income after deduction
-    const newTotalIncomeInEnglish = totalIncomeInEnglish - donationAmountInEnglish;
-
-    // Step 3: Update the total income, converting it back to Bengali numerals
-    const totalIncomeUpdateResult = await totalIncome.updateOne(
-      {}, // Assuming there's only one document representing total income
-      { $set: { totalIncome: convertEnglishToBengali(newTotalIncomeInEnglish) } }
-    );
-
-    console.log('Total income update result:', totalIncomeUpdateResult);
 
     // Step 4: Find the donor and convert the donor's donateAmount to English numerals
     const donor = await donorInfo.findOne({ donorID: donation.donorID });

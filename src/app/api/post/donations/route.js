@@ -24,7 +24,6 @@ export async function POST(req) {
     const db = client.db("mosqueData");
     const donation = db.collection("donationList");
     const donor = db.collection("donorList");
-    const totalIncome = db.collection("totalIncomeList");
 
     const body = await req.json(); // Parse the incoming request body
 
@@ -74,24 +73,6 @@ export async function POST(req) {
       donorID, // Assign the donorID from either the existing or the newly created donor
     });
 
-    // Convert donationAmount from Bengali numerals to English numerals for calculation
-    const donationAmountInEnglish = parseFloat(convertBengaliToEnglish(body.donationAmount));
-
-    // Check if the total balance exists in totalIncome collection and update accordingly
-    const incomeExist = await totalIncome.findOne({});
-    if (!incomeExist) {
-      await totalIncome.insertOne({
-        totalIncome: convertEnglishToBengali(donationAmountInEnglish),
-      });
-    } else {
-      const currentIncomeInEnglish = parseFloat(convertBengaliToEnglish(incomeExist.totalIncome));
-      const updatedIncomeInEnglish = currentIncomeInEnglish + donationAmountInEnglish;
-      const updatedIncomeInBengali = convertEnglishToBengali(updatedIncomeInEnglish);
-
-      await totalIncome.updateOne({}, {
-        $set: { totalIncome: updatedIncomeInBengali },
-      });
-    }
 
     // Return success response
     return new Response(JSON.stringify({ success: true }), {

@@ -67,7 +67,7 @@ function formatNumberWithCommas(number) {
 
     useEffect(() => {
         // Fetch donation data when the component mounts
-        fetch("/api/get/donationList")
+        fetch("/api/get/allDonations")
             .then((response) => {
                 if (!response.ok) {
                     toast.error("একটি সমস্যা হয়েছে");
