@@ -55,6 +55,9 @@ export default function Header() {
                         <li className="bg-green-800 lg:p-1 mb-1 rounded-md hover:bg-green-600">
                              <Link href='/admin/donation-list'>Donations</Link>
                         </li>
+                        <li className="bg-green-800 lg:p-1 mb-1 rounded-md hover:bg-green-600">
+                             <Link href='/admin/costing-list'>Costing</Link>
+                        </li>
                         <li className="bg-red-600 lg:p-1 mb-1 rounded-md hover:bg-red-400">
                              <button onClick={handleLogout}>Logout</button>
                         </li>

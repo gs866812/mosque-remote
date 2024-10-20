@@ -8,9 +8,11 @@ import Swal from 'sweetalert2';
 export default function DonationListPage() {
   const { convertEnglishToBengali, triggerReFetch, reFetch, setRefetch } = useContext(ContextData);
   const [donations, setDonations] = useState([]);
+  const [filteredDonations, setFilteredDonations] = useState([]);
   const [totalDonations, setTotalDonations] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [incomeCategories, setIncomeCategories] = useState([]);
   const [selectedDonation, setSelectedDonation] = useState(null);
@@ -23,6 +25,7 @@ export default function DonationListPage() {
         if (response.ok) {
           const data = await response.json();
           setDonations(data.donations);
+          setFilteredDonations(data.donations);
           setTotalDonations(data.total);
         }
       } catch (error) {
@@ -53,7 +56,6 @@ export default function DonationListPage() {
   // Handler for edit action
   const handleEdit = async (e) => {
     e.preventDefault();
-    console.log(selectedDonation);
 
     try {
       // Send the edited donation data to the server
@@ -144,6 +146,23 @@ export default function DonationListPage() {
     setCurrentPage(pageNumber);
   };
 
+  // Handle search functionality
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+    const filteredList = donations.filter((donation) =>
+      donation.donorID.toString().includes(e.target.value) ||
+      donation.donorName.includes(e.target.value) ||
+      donation.donorAddress.includes(e.target.value) ||
+      donation.donationAmount.includes(e.target.value) ||
+      donation.paymentOption.includes(e.target.value) ||
+      donation.references.includes(e.target.value) ||
+      donation.date.includes(e.target.value) ||
+      donation.incomeCategory.includes(e.target.value)
+    );
+    setFilteredDonations(filteredList);
+    setCurrentPage(1); // Reset to first page after search
+  };
+
   const totalPages = Math.ceil(totalDonations / itemsPerPage);
 
   const renderPagination = () => {
@@ -196,7 +215,16 @@ export default function DonationListPage() {
     <div className='w-full mx-auto'>
       <div className='lg:w-[95%] mx-auto'>
         <div className='my-8'>
-          <h2 className='text-center lg:text-3xl text-xl my-5 font-bold'>সর্বমোট গৃহীত দানের তালিকা</h2>
+          <div className='flex justify-between items-center mb-4'>
+            <h2 className='text-center lg:text-3xl text-xl my-5 font-bold'>সর্বমোট গৃহীত দানের তালিকা</h2>
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={handleSearch}
+              placeholder="খোঁজ করুন..."
+              className="p-2 border rounded"
+            />
+          </div>
           <div className="overflow-x-auto">
             <table className="table-auto border-collapse border border-gray-400 w-full table-zebra">
               <thead className="bg-gray-100">
@@ -212,8 +240,8 @@ export default function DonationListPage() {
                 </tr>
               </thead>
               <tbody>
-                {donations &&
-                  donations.map((donation, idx) => (
+                {filteredDonations &&
+                  filteredDonations.map((donation, idx) => (
                     <tr key={idx}>
                       <td className="border border-gray-400 px-4 py-2 text-center">
                         {convertEnglishToBengali(donation.donorID)}
@@ -223,7 +251,7 @@ export default function DonationListPage() {
                         {donation.donorAddress}
                       </td>
                       <td className="border border-gray-400 px-4 py-2 text-center">
-                        {donation.donationAmount}
+                        {donation.donationAmount} ৳
                       </td>
                       <td className="border border-gray-400 px-4 py-2 text-center">
                         {donation.incomeCategory}
@@ -265,10 +293,8 @@ export default function DonationListPage() {
 
       <dialog id="edit_modal" className="modal">
         <div className="modal-box w-11/12 max-w-5xl">
-          <h3 className="font-bold text-lg">দানের বিবরণ </h3>
-
           <form onSubmit={handleEdit} className='w-full p-5 border-green-600 border mt-5 rounded-lg'>
-            <h2 className='text-xl font-bold mb-4'>দাতার বিবরণ</h2>
+            <h2 className='text-xl font-bold mb-4'>দানের বিবরণ</h2>
 
             <div className='mb-4'>
               <label className='block mb-2'>আয়ের ক্যাটাগরি</label>

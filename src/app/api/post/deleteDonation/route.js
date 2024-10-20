@@ -80,12 +80,12 @@ export async function POST(req) {
 
     if (result.deletedCount === 1) {
       // Successfully deleted
-      return new Response(JSON.stringify({ success: true, message: 'Donation deleted successfully' }), {
+      return new Response(JSON.stringify({ success: true, message: 'Data deleted successfully' }), {
         status: 200,
       });
     } else {
       // Donation not found
-      return new Response(JSON.stringify({ success: false, message: 'Donation not found' }), {
+      return new Response(JSON.stringify({ success: false, message: 'Data not found' }), {
         status: 404,
       });
     }

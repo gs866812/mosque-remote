@@ -86,7 +86,7 @@ function formatNumberWithCommas(number) {
 
     useEffect(() => {
         // Fetch costing data when the component mounts
-        fetch("/api/get/costingList")
+        fetch("/api/get/totalCostingList")
             .then((response) => {
                 if (!response.ok) {
                     toast.error("একটি সমস্যা হয়েছে");
@@ -96,6 +96,7 @@ function formatNumberWithCommas(number) {
             })
             .then((data) => {
                 setCostingList(data); // Store fetched data in the state
+                setTotalIncome(data);
             })
             .catch((err) => {
                 toast.error(err.message); // Show error if fetching fails
@@ -103,23 +104,6 @@ function formatNumberWithCommas(number) {
     }, [reFetch]); // Will re-fetch when reFetch changes
 
 
-    useEffect(() => {
-        // Fetch for main balance
-        fetch("/api/get/totalIncome")
-            .then((response) => {
-                if (!response.ok) {
-                    toast.error("একটি সমস্যা হয়েছে");
-                    return; // Return to stop further execution if there's an error
-                }
-                return response.json();
-            })
-            .then((data) => {
-                setTotalIncome(data); // Store fetched data in the state
-            })
-            .catch((err) => {
-                toast.error(err.message); // Show error if fetching fails
-            });
-    }, [reFetch]); // Will re-fetch when reFetch changes
 
 
     useEffect(() => {

@@ -65,7 +65,7 @@ export default function BalanceHeader() {
 
           <span>{`সর্বমোট খরচঃ`} <span className='text-red-500'>{formattedCostingAmount} ৳ </span></span>
 
-          <span>{`অবশিষ্ট অর্থঃ`} <span className='text-yellow-600'>{formattedRestAmount} ৳ </span></span>
+          <span>{`অবশিষ্ট অর্থঃ`} <span className='text-orange-500'>{formattedRestAmount} ৳ </span></span>
         </h2>
       }
     </div>
