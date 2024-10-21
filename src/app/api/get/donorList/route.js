@@ -1,4 +1,4 @@
-// /api/get/donationList/route.js
+// /api/get/donorList/route.js
 export const dynamic = 'force-dynamic';
 import clientPromise from "@/lib/mongodb";
 
@@ -6,13 +6,13 @@ export async function GET(req) {
   try {
     const client = await clientPromise;
     const db = client.db("mosqueData");
-    const donationCollection = db.collection("donationList");
+    const donorCollection = db.collection("donorList");
 
     // Extract query parameters for pagination and search term
-    const { searchParams } = new URL(req.url);
-    const page = parseInt(searchParams.get("page")) || 1;
-    const limit = parseInt(searchParams.get("limit")) || 20;
-    const search = searchParams.get("search") || '';
+    const url = new URL(req.url);
+    const page = parseInt(url.searchParams.get('page')) || 1;
+    const limit = parseInt(url.searchParams.get('limit')) || 20;
+    const search = url.searchParams.get('search') || '';
 
     // Calculate the skip value
     const skip = (page - 1) * limit;
@@ -27,23 +27,19 @@ export async function GET(req) {
           ...(isNumericSearch ? [{ donorID: parseInt(search) }] : []),
           { donorName: { $regex: searchRegex } },
           { donorAddress: { $regex: searchRegex } },
-          { donationAmount: { $regex: searchRegex } },
-          { paymentOption: { $regex: searchRegex } },
-          { references: { $regex: searchRegex } },
-          { date: { $regex: searchRegex } },
-          { incomeCategory: { $regex: searchRegex } },
+          { donorContact: { $regex: searchRegex } },
         ],
       };
     }
 
-    // Fetch paginated and filtered donations from MongoDB
-    const donations = await donationCollection.find(filter).sort({ _id: -1 }).skip(skip).limit(limit).toArray();
+    // Fetch paginated and filtered donors from MongoDB
+    const result = await donorCollection.find(filter).sort({ _id: -1 }).skip(skip).limit(limit).toArray();
 
     // Fetch total count for pagination (with filter applied)
-    const totalDonations = await donationCollection.countDocuments(filter);
+    const totalDonors = await donorCollection.countDocuments(filter);
 
-    // Return success response with donation data and total count
-    return new Response(JSON.stringify({ donations, total: totalDonations }), {
+    // Return success response with donor data and total count
+    return new Response(JSON.stringify({ donors: result, total: totalDonors }), {
       status: 200,
       headers: {
         "Content-Type": "application/json",

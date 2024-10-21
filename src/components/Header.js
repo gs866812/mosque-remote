@@ -48,7 +48,7 @@ export default function Header() {
 
                 <div className="dropdown dropdown-end absolute right-0">
                     <div tabIndex={0} role="button"><RiMenu3Line className="text-3xl"/></div>
-                    <ul tabIndex={0} className="dropdown-content menu rounded-md z-[1] lg:w-52 lg:p-2 shadow bg-white lg:mt-5 mt-3">
+                    <ul tabIndex={0} className="dropdown-content menu rounded-md z-50 lg:w-52 lg:p-2 shadow bg-white lg:mt-5 mt-3">
                         <li className="bg-green-800 lg:p-1 mb-1 rounded-md hover:bg-green-600">
                             <Link href='/'>Home</Link>
                         </li>
@@ -57,6 +57,9 @@ export default function Header() {
                         </li>
                         <li className="bg-green-800 lg:p-1 mb-1 rounded-md hover:bg-green-600">
                              <Link href='/admin/costing-list'>Costing</Link>
+                        </li>
+                        <li className="bg-green-800 lg:p-1 mb-1 rounded-md hover:bg-green-600">
+                             <Link href='/admin/donor-list'>Donor list</Link>
                         </li>
                         <li className="bg-red-600 lg:p-1 mb-1 rounded-md hover:bg-red-400">
                              <button onClick={handleLogout}>Logout</button>

@@ -17,10 +17,10 @@ export default function CostingListPage() {
   const itemsPerPage = 20;
 
   useEffect(() => {
-    // Fetch costing data when the component mounts
+    // Fetch costing data with pagination and search term
     const fetchCostingData = async () => {
       try {
-        const response = await fetch(`/api/get/costingList?page=${currentPage}&limit=${itemsPerPage}`);
+        const response = await fetch(`/api/get/costingList?page=${currentPage}&limit=${itemsPerPage}&search=${searchTerm}`);
         if (response.ok) {
           const data = await response.json();
           setCostingList(data.expenses);
@@ -32,24 +32,7 @@ export default function CostingListPage() {
       }
     };
     fetchCostingData();
-  }, [reFetch, currentPage]); // Will re-fetch when reFetch changes
-
-  // Fetch Expense Categories
-  useEffect(() => {
-    const fetchExpenseCategories = async () => {
-      try {
-        const response = await fetch('/api/get/expenseCategory');
-        if (response.ok) {
-          const data = await response.json();
-          setExpenseCategories(data);
-        }
-      } catch (error) {
-        console.error('Error fetching expense categories:', error);
-      }
-    };
-
-    fetchExpenseCategories();
-  }, [reFetch]);
+  }, [reFetch, currentPage, searchTerm]); // Re-fetch when reFetch, currentPage, or searchTerm changes
 
   // Handle Edit
   const handleEdit = async (e) => {
@@ -66,7 +49,7 @@ export default function CostingListPage() {
       if (response.ok) {
         triggerReFetch();
         setRefetch(!reFetch);
-        document.getElementById('edit_modal').close(); // Close the modal after handling the edit
+        document.getElementById('edit_modal').close();
         Swal.fire({
           title: "Edited!",
           text: "Your data has been successfully updated.",
@@ -140,13 +123,6 @@ export default function CostingListPage() {
   // Handle search
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
-    const filteredList = costingList.filter((costing) =>
-      costing.expenseDescription.includes(e.target.value) ||
-      costing.expenseAmount.includes(e.target.value) ||
-      costing.date.includes(e.target.value) ||
-      costing.expenseCategory.includes(e.target.value)
-    );
-    setFilteredCostingList(filteredList);
     setCurrentPage(1); // Reset to first page after search
   };
 
@@ -228,8 +204,8 @@ export default function CostingListPage() {
                 </tr>
               </thead>
               <tbody>
-                {filteredCostingList
-                  .map((costing, index) => (
+                {filteredCostingList &&
+                  filteredCostingList.map((costing, index) => (
                     <tr key={index}>
                       <td className="border border-gray-400 px-4 py-2">{costing.expenseDescription}</td>
                       <td className="border border-gray-400 px-4 py-2 text-center">{convertEnglishToBengali(costing.expenseAmount)} ৳</td>

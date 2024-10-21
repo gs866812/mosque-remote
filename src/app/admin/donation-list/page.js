@@ -18,10 +18,10 @@ export default function DonationListPage() {
   const [selectedDonation, setSelectedDonation] = useState(null);
 
   useEffect(() => {
-    // Fetch donations with pagination
+    // Fetch donations with pagination and search term
     const fetchDonations = async () => {
       try {
-        const response = await fetch(`/api/get/donationList?page=${currentPage}&limit=${itemsPerPage}`);
+        const response = await fetch(`/api/get/donationList?page=${currentPage}&limit=${itemsPerPage}&search=${searchTerm}`);
         if (response.ok) {
           const data = await response.json();
           setDonations(data.donations);
@@ -34,7 +34,7 @@ export default function DonationListPage() {
     };
 
     fetchDonations();
-  }, [currentPage, reFetch]);
+  }, [currentPage, reFetch, searchTerm]);
 
   // Fetch Income Categories
   useEffect(() => {
@@ -141,35 +141,23 @@ export default function DonationListPage() {
     });
   };
 
-  // Handler for pagination click
+  // Handle search functionality
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(1); // Reset to first page after search
+  };
+
+  // Handle pagination click
   const handlePageClick = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  // Handle search functionality
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-    const filteredList = donations.filter((donation) =>
-      donation.donorID.toString().includes(e.target.value) ||
-      donation.donorName.includes(e.target.value) ||
-      donation.donorAddress.includes(e.target.value) ||
-      donation.donationAmount.includes(e.target.value) ||
-      donation.paymentOption.includes(e.target.value) ||
-      donation.references.includes(e.target.value) ||
-      donation.date.includes(e.target.value) ||
-      donation.incomeCategory.includes(e.target.value)
-    );
-    setFilteredDonations(filteredList);
-    setCurrentPage(1); // Reset to first page after search
-  };
-
   const totalPages = Math.ceil(totalDonations / itemsPerPage);
+  const minPage = Math.max(currentPage - 2, 1);
+  const maxPage = Math.min(currentPage + 2, totalPages);
 
   const renderPagination = () => {
     const pageNumbers = [];
-    const minPage = Math.max(currentPage - 2, 1);
-    const maxPage = Math.min(currentPage + 2, totalPages);
-
     for (let i = minPage; i <= maxPage; i++) {
       pageNumbers.push(i);
     }
