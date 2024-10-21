@@ -16,6 +16,23 @@ export default function CostingListPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const itemsPerPage = 20;
 
+
+  useEffect(() => {
+    const fetchExpenseCategories = async () => {
+      try {
+        const response = await fetch('/api/get/expenseCategory');
+        if (response.ok) {
+          const data = await response.json();
+          setExpenseCategories(data);
+        }
+      } catch (error) {
+        console.error('Error fetching income categories:', error);
+      }
+    };
+
+    fetchExpenseCategories();
+  }, [reFetch]);
+
   useEffect(() => {
     // Fetch costing data with pagination and search term
     const fetchCostingData = async () => {
